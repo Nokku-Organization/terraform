@@ -1,0 +1,18 @@
+{
+  "variables": {
+  },
+  "builders": [{
+    "type": "amazon-ebs",
+    "region": "us-east-1",
+    "source_ami": "ami-035b3c7efe6d061d5",
+    "instance_type": "t2.micro",
+    "ssh_username": "ec2-user",
+    "ami_name": "packer-example-6",
+"temporary_security_group_source_cidrs":["54.172.236.90/32","host=where you are running coe"]
+  }],
+  "provisioners": [{
+    "type": "shell",
+    "inline": ["sudo yum install git -y"],
+    "pause_before": "10s"
+  }]
+}
