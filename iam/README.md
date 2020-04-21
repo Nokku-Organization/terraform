@@ -37,6 +37,45 @@
 
 
 ## Data Resources:
+### aws_iam_policy_document:
+      data "aws_iam_policy_document" "example" {
+        statement {
+          sid = "1"
+
+          actions = [
+            "s3:ListAllMyBuckets",
+            "s3:GetBucketLocation",
+          ]
+
+          resources = [
+            "arn:aws:s3:::*",
+          ]
+        }
+
+        statement {
+          actions = [
+            "s3:*",
+          ]
+
+          resources = [
+            "arn:aws:s3:::${var.s3_bucket_name}/home/&{aws:username}",
+            "arn:aws:s3:::${var.s3_bucket_name}/home/&{aws:username}/*",
+          ]
+        }
+      }
+
+      resource "aws_iam_policy" "example" {
+        name   = "example_policy"
+        path   = "/"
+        policy = "${data.aws_iam_policy_document.example.json}"
+      }
+      
+- This data source is important and used in place of resouce ("aws_iam_policy"), for creating iam-policy and attach to role.
+
+- Remaining Data sources are only used for collecting data.
+
+- Important thing about data sources is , they run during plan, which we can make use of in sentinel-policies.
+
 ### aws_iam_account_alias:
       data "aws_iam_account_alias" "current" {}
 
