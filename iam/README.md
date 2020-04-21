@@ -148,3 +148,41 @@ For more info , click [here](https://stackoverflow.com/questions/46324062/in-aws
  - This is used to attach Managed policy to the iam-group
  
  
+ 
+ ## IAM Permissions : 
+      aws_iam_access_key
+      aws_iam_account_alias
+      aws_iam_account_password_policy
+      aws_iam_group
+      aws_iam_group_membership
+      aws_iam_group_policy
+      aws_iam_group_policy_attachment      
+      aws_iam_openid_connect_provider      
+      aws_iam_server_certificate      
+      aws_iam_user
+      aws_iam_user_group_membership
+      aws_iam_user_login_profile      
+      aws_iam_user_ssh_key      
+      aws_iam_user_policy
+      aws_iam_user_policy_attachment
+      aws_iam_instance_profile --> create instance-profile(iam:CreateInstanceProfile)
+      aws_iam_role  --> createRole(iam:CreateRole)
+      aws_iam_service_linked_role   -->(iam:CreateServiceLinkedRole)
+      aws_iam_policy
+      aws_iam_policy_attachment --> warning in using it (WARNING: The aws_iam_policy_attachment resource creates exclusive attachments of IAM policies. Across the entire AWS account, all of the users/roles/groups to which a single policy is attached must be declared by a single aws_iam_policy_attachment resource. This means that even any users/roles/groups that have the attached policy via any other mechanism (including other Terraform resources) will have that attached policy revoked by this resource. )
+      aws_iam_role_policy
+      aws_iam_role_policy_attachment
+      aws_iam_saml_provider
+      
+      
+      
+ ### Adding and deleting instance profiles:
+      $ aws iam add-role-to-instance-profile --role-name ecsInstanceRole --instance-profile-name Webserver
+      $ aws iam remove-role-from-instance-profile --instance-profile-name ecsInstanceRole --role-name ecsInstanceRole
+      $ aws iam remove-role-from-instance-profile --instance-profile-name Webserver --role-name ecsInstanceRole
+ - An instance profile is a container for an IAM role that you can use to pass role information to an EC2 instance when the instance starts.
+ - An instance profile can contain only one IAM role, although a role can be included in multiple instance profiles. This limit of one role per instance profile cannot be increased. 
+ - You can remove the existing role and then add a different role to an instance profile. You must then wait for the change to appear across all of AWS because of eventual consistency.To force the change, you must disassociate the instance profile and then associate the instance profile, or you can stop your instance and then restart it.
+ 
+ More info, click [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html)
+ 
