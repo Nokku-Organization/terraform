@@ -36,6 +36,18 @@
       aws_iam_user_ssh_key
 
 
+## Data Resources:
+### aws_iam_account_alias:
+      data "aws_iam_account_alias" "current" {}
+
+      output "account_id" {
+        value = "${data.aws_iam_account_alias.current.account_alias}"
+      }
+- The IAM Account Alias data source allows access to the account alias for the effective account in which Terraform is working.
+
+
+
+## Resources:
 ### aws_iam_access_key:
       resource "aws_iam_access_key" "test" {
         user = "<username>"
@@ -59,6 +71,41 @@
 - Here path is used to disinguish the groups/users in the organizattions.
 - In the arn this path reflects : "arn:aws:iam::419639163435:group/users/developers"
 - If we haven't mentioned path in the script default path '/' is been taken, and we can change this path via terraform as a change(instead of deleting and creating iam-group).i.e, via terraform no new iam-group is created if we change the path,it modifies the existing iam-group.
+For more info , click [here](https://stackoverflow.com/questions/46324062/in-aws-iam-what-is-the-purpose-use-of-the-path-variable)
 
- For more info , click [here](https://stackoverflow.com/questions/46324062/in-aws-iam-what-is-the-purpose-use-of-the-path-variable)
 
+
+
+### aws_iam_group_policy:
+      resource "aws_iam_group_policy" "my_developer_policy" {
+        name  = "my_developer_policy"
+        group = "${aws_iam_group.my_developers.id}"
+
+        policy = <<EOF
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": [
+              "ec2:Describe*"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
+          }
+        ]
+      }
+      EOF
+      }
+
+      resource "aws_iam_group" "my_developers" {
+        name = "developers"
+        path = "/users/"
+      }
+      
+
+ - This is used to create iam-group-inline-policy
+ 
+ ### aws_iam_group_policy_attachment:
+ - This is used to attach Managed policy to the iam-group
+ 
+ 
