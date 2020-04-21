@@ -8,7 +8,7 @@
     "instance_type": "t2.micro",
     "ssh_username": "ec2-user",
     "ami_name": "packer-example-6",
-"temporary_security_group_source_cidrs":["54.172.236.90/32","host=where you are running coe"]
+"temporary_security_group_source_cidrs":["x.x.x.x/32","host=where you are running coe"]
   }],
   "provisioners": [{
     "type": "shell",
