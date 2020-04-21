@@ -41,4 +41,23 @@
         user = "<username>"
       }
 
-https://stackoverflow.com/questions/46324062/in-aws-iam-what-is-the-purpose-use-of-the-path-variable
+
+
+
+### aws_iam_account_alias:
+      resource "aws_iam_account_alias" "alias" {
+        account_alias = "my-account-alias"
+      }
+- it is checking that account-alias to be unique.(when i tried to create with "my-account-alias" , it hasn't created.but with different name it got created)
+
+
+### aws_iam_group:
+      resource "aws_iam_group" "developers" {
+        name = "developers"
+        path = "/users/"
+      }
+-Here path is used to disinguish the groups/users in the organizattions.
+-In the arn this path reflects : "arn:aws:iam::419639163435:group/users/developers"
+
+For more info , click [here](https://stackoverflow.com/questions/46324062/in-aws-iam-what-is-the-purpose-use-of-the-path-variable)
+
