@@ -58,6 +58,6 @@
       }
 -Here path is used to disinguish the groups/users in the organizattions.
 -In the arn this path reflects : "arn:aws:iam::419639163435:group/users/developers"
-
+-If we haven't mentioned path in the script default path '/' is been taken, and we can change this path via terraform as a change(instead of deleting and creating iam-group).i.e, via terraform no new iam-group is created if we change the path,it modifies the existing iam-group.
 For more info , click [here](https://stackoverflow.com/questions/46324062/in-aws-iam-what-is-the-purpose-use-of-the-path-variable)
 
