@@ -34,3 +34,11 @@
       aws_iam_user_policy
       aws_iam_user_policy_attachment
       aws_iam_user_ssh_key
+
+
+### aws_iam_access_key:
+      resource "aws_iam_access_key" "test" {
+        user = "<username>"
+      }
+
+https://stackoverflow.com/questions/46324062/in-aws-iam-what-is-the-purpose-use-of-the-path-variable
